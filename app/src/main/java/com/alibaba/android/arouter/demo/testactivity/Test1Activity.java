@@ -59,8 +59,11 @@ public class Test1Activity extends AppCompatActivity {
     @Autowired
     String url;
 
-    @Autowired
+    @Autowired(name = "/service/hello")
     HelloService helloService;
+
+    @Autowired
+    HelloService helloService2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,5 +99,6 @@ public class Test1Activity extends AppCompatActivity {
 
         ((TextView) findViewById(R.id.test)).setText("I am " + Test1Activity.class.getName());
         ((TextView) findViewById(R.id.test2)).setText(params);
+        helloService2.sayHello("hello2");
     }
 }

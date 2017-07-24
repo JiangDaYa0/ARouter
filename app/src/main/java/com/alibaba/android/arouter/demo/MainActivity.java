@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.demo.testinject.TestObj;
 import com.alibaba.android.arouter.demo.testinject.TestParcelable;
 import com.alibaba.android.arouter.demo.testservice.HelloService;
-import com.alibaba.android.arouter.demo.testservice.SingleService;
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.callback.NavCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -189,7 +188,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
                 break;
             case R.id.callSingle:
-                ARouter.getInstance().navigation(SingleService.class).sayHello("Mike");
+//                ARouter.getInstance().navigation(SingleService.class).sayHello("Mike");
+                ARouter.getInstance().build("/data/activity").withInt("age", 10).withString("name", "to sub").navigation();
                 break;
             case R.id.failNav2:
                 ARouter.getInstance().build("/xxx/xxx").navigation();

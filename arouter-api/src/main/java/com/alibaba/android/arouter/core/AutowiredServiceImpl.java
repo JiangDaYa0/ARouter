@@ -37,7 +37,7 @@ public class AutowiredServiceImpl implements AutowiredService {
             if (!blackList.contains(className)) {
                 ISyringe autowiredHelper = classCache.get(className);
                 if (null == autowiredHelper) {  // No cache.
-                    autowiredHelper = (ISyringe) Class.forName(instance.getClass().getName() + SUFFIX_AUTOWIRED).getConstructor().newInstance();
+                    autowiredHelper = (ISyringe) instance.getClass().getClassLoader().loadClass(instance.getClass().getName() + SUFFIX_AUTOWIRED).getConstructor().newInstance();
                 }
                 autowiredHelper.inject(instance);
                 classCache.put(className, autowiredHelper);

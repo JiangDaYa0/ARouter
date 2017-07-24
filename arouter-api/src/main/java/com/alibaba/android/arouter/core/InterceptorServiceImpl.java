@@ -105,14 +105,14 @@ public class InterceptorServiceImpl implements InterceptorService {
             @Override
             public void run() {
                 if (MapUtils.isNotEmpty(Warehouse.interceptorsIndex)) {
-                    for (Map.Entry<Integer, Class<? extends IInterceptor>> entry : Warehouse.interceptorsIndex.entrySet()) {
-                        Class<? extends IInterceptor> interceptorClass = entry.getValue();
+                    for (Map.Entry<Integer, String> entry : Warehouse.interceptorsIndex.entrySet()) {
                         try {
+                            Class<? extends IInterceptor> interceptorClass = (Class<? extends IInterceptor>) Class.forName(entry.getValue());
                             IInterceptor iInterceptor = interceptorClass.getConstructor().newInstance();
                             iInterceptor.init(context);
                             Warehouse.interceptors.add(iInterceptor);
                         } catch (Exception ex) {
-                            throw new HandlerException(TAG + "ARouter init interceptor error! name = [" + interceptorClass.getName() + "], reason = [" + ex.getMessage() + "]");
+                            throw new HandlerException(TAG + "ARouter init interceptor error! name = [" + entry.getValue() + "], reason = [" + ex.getMessage() + "]");
                         }
                     }
 

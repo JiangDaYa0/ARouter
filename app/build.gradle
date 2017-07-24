@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.taobao.atlas'
+
+apply plugin: 'atlas-router'
 
 android {
     compileSdkVersion Integer.parseInt(COMPILE_SDK_VERSION)
@@ -47,14 +50,44 @@ android {
     }
 }
 
+atlas {
+    atlasEnabled true
+    tBuildConfig {
+        autoStartBundles = ['com.alibaba.android.arouter.demo.module1']
+        classInject false
+        abortIfDependencyConflict false
+        abortIfClassConflict false
+    }
+
+    manifestOptions {
+        addAtlasProxyComponents true
+    }
+
+    patchConfigs {
+        debug {
+            createTPatch false
+        }
+        release {
+            createTPatch false
+        }
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
+    compile('com.taobao.android:atlas_core:5.0.7.30@aar') {
+        transitive = true
+    }
+
     annotationProcessor project(':arouter-compiler')
     compile project(':arouter-api')
-    compile project(':module-java')
-    compile project(':module-kotlin')
     compile project(':arouter-annotation')
+
+    compile project(':data')
+    compile project(':module-kotlin')
+
+    compile project(':module-java')
 
     compile 'com.alibaba:fastjson:1.2.9'
 

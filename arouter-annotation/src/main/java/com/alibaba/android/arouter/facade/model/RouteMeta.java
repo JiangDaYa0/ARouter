@@ -17,7 +17,7 @@ import javax.lang.model.element.Element;
 public class RouteMeta {
     private RouteType type;         // Type of route
     private Element rawType;        // Raw type of route
-    private Class<?> destination;   // Destination
+    private String destination;   // Destination
     private String path;            // Path of route
     private String group;           // Group of route
     private int priority = -1;      // The smaller the number, the higher the priority
@@ -38,7 +38,7 @@ public class RouteMeta {
      * @param extra       extra
      * @return this
      */
-    public static RouteMeta build(RouteType type, Class<?> destination, String path, String group, int priority, int extra) {
+    public static RouteMeta build(RouteType type, String destination, String path, String group, int priority, int extra) {
         return new RouteMeta(type, null, destination, path, group, null, priority, extra);
     }
 
@@ -54,7 +54,7 @@ public class RouteMeta {
      * @param extra       extra
      * @return this
      */
-    public static RouteMeta build(RouteType type, Class<?> destination, String path, String group, Map<String, Integer> paramsType, int priority, int extra) {
+    public static RouteMeta build(RouteType type, String destination, String path, String group, Map<String, Integer> paramsType, int priority, int extra) {
         return new RouteMeta(type, null, destination, path, group, paramsType, priority, extra);
     }
 
@@ -65,7 +65,7 @@ public class RouteMeta {
      * @param destination destination
      * @param type        type
      */
-    public RouteMeta(Route route, Class<?> destination, RouteType type) {
+    public RouteMeta(Route route, String destination, RouteType type) {
         this(type, null, destination, route.path(), route.group(), null, route.priority(), route.extras());
     }
 
@@ -93,7 +93,7 @@ public class RouteMeta {
      * @param priority    priority
      * @param extra       extra
      */
-    public RouteMeta(RouteType type, Element rawType, Class<?> destination, String path, String group, Map<String, Integer> paramsType, int priority, int extra) {
+    public RouteMeta(RouteType type, Element rawType, String destination, String path, String group, Map<String, Integer> paramsType, int priority, int extra) {
         this.type = type;
         this.destination = destination;
         this.rawType = rawType;
@@ -131,11 +131,11 @@ public class RouteMeta {
         return this;
     }
 
-    public Class<?> getDestination() {
+    public String getDestination() {
         return destination;
     }
 
-    public RouteMeta setDestination(Class<?> destination) {
+    public RouteMeta setDestination(String destination) {
         this.destination = destination;
         return this;
     }

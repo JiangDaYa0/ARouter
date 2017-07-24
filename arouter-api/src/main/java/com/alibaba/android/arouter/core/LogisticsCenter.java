@@ -189,8 +189,14 @@ public class LogisticsCenter {
             switch (routeMeta.getType()) {
                 case PROVIDER:  // if the route is provider, should find its instance
                     // Its provider, so it must be implememt IProvider
-                    Class<? extends IProvider> providerMeta = (Class<? extends IProvider>) routeMeta.getDestination();
-                    IProvider instance = Warehouse.providers.get(providerMeta);
+                    Class<? extends IProvider> providerMeta = null;
+                    IProvider instance = null;
+                    try {
+                        providerMeta = (Class<? extends IProvider>) Class.forName(routeMeta.getDestination());
+                        instance = Warehouse.providers.get(providerMeta);
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
                     if (null == instance) { // There's no instance of this provider
                         IProvider provider;
                         try {

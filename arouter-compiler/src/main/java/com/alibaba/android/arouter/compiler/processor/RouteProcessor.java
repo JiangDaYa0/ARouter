@@ -272,21 +272,21 @@ public class RouteProcessor extends AbstractProcessor {
                                 if (types.isSameType(tm, iProvider)) {   // Its implements iProvider interface himself.
                                     // This interface extend the IProvider, so it can be used for mark provider
                                     loadIntoMethodOfProviderBuilder.addStatement(
-                                            "providers.put($S, $T.build($T." + routeMeta.getType() + ", $T.class, $S, $S, null, " + routeMeta.getPriority() + ", " + routeMeta.getExtra() + "))",
+                                            "providers.put($S, $T.build($T." + routeMeta.getType() + ", $S, $S, $S, null, " + routeMeta.getPriority() + ", " + routeMeta.getExtra() + "))",
                                             (routeMeta.getRawType()).toString(),
                                             routeMetaCn,
                                             routeTypeCn,
-                                            ClassName.get((TypeElement) routeMeta.getRawType()),
+                                            ClassName.get((TypeElement) routeMeta.getRawType()).toString(),
                                             routeMeta.getPath(),
                                             routeMeta.getGroup());
                                 } else if (types.isSubtype(tm, iProvider)) {
                                     // This interface extend the IProvider, so it can be used for mark provider
                                     loadIntoMethodOfProviderBuilder.addStatement(
-                                            "providers.put($S, $T.build($T." + routeMeta.getType() + ", $T.class, $S, $S, null, " + routeMeta.getPriority() + ", " + routeMeta.getExtra() + "))",
+                                            "providers.put($S, $T.build($T." + routeMeta.getType() + ", $S, $S, $S, null, " + routeMeta.getPriority() + ", " + routeMeta.getExtra() + "))",
                                             tm.toString(),    // So stupid, will duplicate only save class name.
                                             routeMetaCn,
                                             routeTypeCn,
-                                            ClassName.get((TypeElement) routeMeta.getRawType()),
+                                            ClassName.get((TypeElement) routeMeta.getRawType()).toString(),
                                             routeMeta.getPath(),
                                             routeMeta.getGroup());
                                 }
@@ -307,11 +307,11 @@ public class RouteProcessor extends AbstractProcessor {
                     String mapBody = mapBodyBuilder.toString();
 
                     loadIntoMethodOfGroupBuilder.addStatement(
-                            "atlas.put($S, $T.build($T." + routeMeta.getType() + ", $T.class, $S, $S, " + (StringUtils.isEmpty(mapBody) ? null : ("new java.util.HashMap<String, Integer>(){{" + mapBodyBuilder.toString() + "}}")) + ", " + routeMeta.getPriority() + ", " + routeMeta.getExtra() + "))",
+                            "atlas.put($S, $T.build($T." + routeMeta.getType() + ", $S, $S, $S, " + (StringUtils.isEmpty(mapBody) ? null : ("new java.util.HashMap<String, Integer>(){{" + mapBodyBuilder.toString() + "}}")) + ", " + routeMeta.getPriority() + ", " + routeMeta.getExtra() + "))",
                             routeMeta.getPath(),
                             routeMetaCn,
                             routeTypeCn,
-                            ClassName.get((TypeElement) routeMeta.getRawType()),
+                            ClassName.get((TypeElement) routeMeta.getRawType()).toString(),
                             routeMeta.getPath().toLowerCase(),
                             routeMeta.getGroup().toLowerCase());
                 }

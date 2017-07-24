@@ -28,7 +28,7 @@ class Warehouse {
     static Map<String, RouteMeta> providersIndex = new HashMap<>();
 
     // Cache interceptor
-    static Map<Integer, Class<? extends IInterceptor>> interceptorsIndex = new UniqueKeyTreeMap<>("More than one interceptors use same priority [%s]");
+    static Map<Integer, String> interceptorsIndex = new UniqueKeyTreeMap<>("More than one interceptors use same priority [%s]");
     static List<IInterceptor> interceptors = new ArrayList<>();
 
     static void clear() {

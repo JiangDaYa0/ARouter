@@ -1,0 +1,25 @@
+apply plugin: 'groovy'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+    }
+}
+
+targetCompatibility = JavaVersion.VERSION_1_7
+sourceCompatibility = JavaVersion.VERSION_1_7
+
+
+dependencies {
+    repositories {
+        jcenter()
+    }
+
+    compile gradleApi()
+    compile localGroovy()
+    compile 'com.taobao.android:atlasplugin:2.3.3.rc1'
+    compile 'com.squareup:javapoet:1.8.0'
+}

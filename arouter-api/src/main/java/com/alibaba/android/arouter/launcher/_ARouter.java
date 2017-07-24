@@ -338,7 +338,8 @@ final class _ARouter {
         switch (postcard.getType()) {
             case ACTIVITY:
                 // Build intent
-                final Intent intent = new Intent(currentContext, postcard.getDestination());
+                final Intent intent = new Intent();
+                intent.setClassName(currentContext, postcard.getDestination());
                 intent.putExtras(postcard.getExtras());
 
                 // Set flags.
@@ -375,8 +376,8 @@ final class _ARouter {
             case BOARDCAST:
             case CONTENT_PROVIDER:
             case FRAGMENT:
-                Class fragmentMeta = postcard.getDestination();
                 try {
+                    Class fragmentMeta = Class.forName(postcard.getDestination());
                     Object instance = fragmentMeta.getConstructor().newInstance();
                     if (instance instanceof Fragment) {
                         ((Fragment) instance).setArguments(postcard.getExtras());

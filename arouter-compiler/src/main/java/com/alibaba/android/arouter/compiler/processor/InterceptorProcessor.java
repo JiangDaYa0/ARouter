@@ -173,10 +173,7 @@ public class InterceptorProcessor extends AbstractProcessor {
             ParameterizedTypeName inputMapTypeOfTollgate = ParameterizedTypeName.get(
                     ClassName.get(Map.class),
                     ClassName.get(Integer.class),
-                    ParameterizedTypeName.get(
-                            ClassName.get(Class.class),
-                            WildcardTypeName.subtypeOf(ClassName.get(type_ITollgate))
-                    )
+                    ClassName.get(String.class)
             );
 
             // Build input param name.
@@ -192,7 +189,7 @@ public class InterceptorProcessor extends AbstractProcessor {
             if (null != interceptors && interceptors.size() > 0) {
                 // Build method body
                 for (Map.Entry<Integer, Element> entry : interceptors.entrySet()) {
-                    loadIntoMethodOfTollgateBuilder.addStatement("interceptors.put(" + entry.getKey() + ", $T.class)", ClassName.get((TypeElement) entry.getValue()));
+                    loadIntoMethodOfTollgateBuilder.addStatement("interceptors.put(" + entry.getKey() + ", $S)", ClassName.get((TypeElement) entry.getValue()).toString());
                 }
             }
 

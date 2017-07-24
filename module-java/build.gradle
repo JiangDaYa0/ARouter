@@ -1,12 +1,14 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.taobao.atlas'
+apply plugin: 'com.taobao.atlas'
 
-//apply plugin: 'atlas-router'
+apply plugin: 'atlas-router'
 
 dependencies {
     compile "com.android.support:appcompat-v7:${SUPPORT_LIB_VERSION}"
 
-    compile project(':arouter-api')
+    provided project(':arouter-api')
+    provided project(':arouter-annotation')
+    provided project(':data')
     annotationProcessor project(':arouter-compiler')
 }
 android {
@@ -40,8 +42,8 @@ android {
     }
 }
 
-//atlas {
-//    bundleConfig {
-//        awbBundle true
-//    }
-//}
+atlas {
+    bundleConfig {
+        awbBundle true
+    }
+}

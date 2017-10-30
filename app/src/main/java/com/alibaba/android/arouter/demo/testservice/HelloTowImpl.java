@@ -14,7 +14,7 @@ public class HelloTowImpl implements HelloService {
     Context mContext;
     @Override
     public void sayHello(String name) {
-        Log.d("tag", "Hello2 " + name);
+        Toast.makeText(mContext, "Hello " + name, Toast.LENGTH_SHORT).show();
 //        Toast.makeText(mContext, "Hello2 " + name, Toast.LENGTH_SHORT).show();
     }
 

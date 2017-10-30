@@ -88,6 +88,7 @@ dependencies {
     compile project(':module-kotlin')
 
     bundleCompile project(':module-java')
+    bundleCompile project(':module-sub')
 
     compile 'com.alibaba:fastjson:1.2.9'
 

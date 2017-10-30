@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 
 /**
  * TODO feature
@@ -19,7 +20,9 @@ public class HelloServiceImpl implements HelloService {
 
     @Override
     public void sayHello(String name) {
-        Toast.makeText(mContext, "Hello " + name, Toast.LENGTH_SHORT).show();
+        HelloTowImpl helloTow = (HelloTowImpl) ARouter.getInstance().build("/service/hello2").navigation();
+        helloTow.sayHello("from hello tow");
+        Log.d("tag", "Hello" + name);
     }
 
     /**

@@ -1,4 +1,4 @@
-include ':app'
+include ':app', ':module-sub'
 include ':data'
 include ':arouter-api'
 include ':arouter-compiler'
